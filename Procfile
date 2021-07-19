@@ -1,1 +1,1 @@
-web: gunicorn stalkerRat.wsgi --log-file -
+web: gunicorn online_chat.wsgi --log-file -
