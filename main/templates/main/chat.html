@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat | Global online chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #111;
+        }
+
+        * {
+            margin: 0;
+        }
+
+        div {}
+
+        #send,
+        #logout {
+            float: right;
+            width: 100px;
+            height: 50px;
+            color: #EEE;
+            border: none;
+            transition-duration: 0.7s;
+            font-size: 22px;
+            font-family: 'Times New Roman', Times, serif;
+            box-shadow:
+                -7px -7px 20px 0px #0009,
+                -4px -4px 5px 0px #0009,
+                7px 7px 20px 0px #FFF2,
+                4px 4px 5px 0px #FFF1;
+            background: transparent;
+        }
+
+        .fa {
+            float: right;
+            width: 50px;
+            height: 50px;
+            color: #EEE;
+            border: none;
+            transition-duration: 0.7s;
+            font-size: 22px;
+            background: transparent;
+            border-radius: 50%;
+            position: relative;
+            left: -20px;
+            top: -125px;
+            box-shadow:
+                -7px -7px 20px 0px #0009,
+                -4px -4px 5px 0px #0009,
+                7px 7px 20px 0px #FFF2,
+                4px 4px 5px 0px #FFF1;
+        }
+
+        #loadmsgs {
+            margin: 10px;
+            margin-left: calc(50% - 60px);
+            height: 40px;
+            width: 120px;
+            border: none;
+            transition-duration: 0.7s;
+            font-size: 12px;
+            color: #EEE;
+            background: transparent;
+            box-shadow:
+                -7px -7px 20px 0px #0009,
+                -4px -4px 5px 0px #0009,
+                7px 7px 20px 0px #FFF2,
+                4px 4px 5px 0px #FFF1;
+            font-family: Times New Roman;
+        }
+
+        #send:hover,
+        #logout:hover,
+        #loadmsgs:hover,
+        .fa:hover {
+            box-shadow:
+                -7px -7px 20px 0px #2229,
+                -4px -4px 5px 0px #2229,
+                2px 2px 20px 0px #EEE2,
+                1px 1px 5px 0px #EEE2;
+            background-color: #121212;
+            color: #FFF;
+        }
+
+        input {
+            width: calc(100% - 115px);
+            height: 48px;
+            border: none;
+            padding-left: 10px;
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            color: #EEE;
+            box-shadow:
+                -7px -7px 20px 0px #0009,
+                -4px -4px 5px 0px #0009,
+                2px 2px 20px 0px #FFF2,
+                1px 1px 5px 0px #FFF1;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        input:focus {
+            box-shadow:
+                -7px -7px 20px 0px #2229,
+                -4px -4px 5px 0px #2229,
+                2px 2px 20px 0px #EEE2,
+                1px 1px 5px 0px #EEE2;
+            color: #EEE;
+        }
+
+        h1 {
+            padding-left: 10px;
+            color: #EEE;
+            display: inline-block;
+            font-family: 'Times New Roman', Times, serif;
+            text-shadow:
+                0 1px 0 #444,
+                0 2px 0 #333,
+                0 3px 0 #555,
+                0 4px 0 #585858,
+                0 5px 0 #666,
+                0 6px 1px rgba(100, 100, 100, .1),
+                0 0 5px rgba(100, 100, 100, .1),
+                0 1px 3px rgba(100, 100, 100, .3),
+                0 3px 5px rgba(100, 100, 100, .2),
+                0 5px 10px rgba(100, 100, 100, .25),
+                0 10px 10px rgba(100, 100, 100, .2),
+                0 20px 20px rgba(100, 100, 100, .15);
+        }
+
+        #msg_container {
+            height: 400px;
+            background: transparent;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        #header {
+            padding: 10px;
+            border: none;
+            box-shadow:
+                -7px -7px 20px 0px #0009,
+                -4px -4px 5px 0px #0009,
+                7px 7px 20px 0px #FFF2,
+                4px 4px 5px 0px #FFF1;
+            background: transparent;
+        }
+
+        p {
+            padding: 10px;
+            border: 1px solid #DDD;
+            border-radius: 0px 10px 10px 10px;
+            margin: 10px;
+            background-color: #222;
+            color: #EEE;
+            word-break: break-all;
+            width: auto;
+            display: inline-block;
+        }
+
+        #user_msg {
+            background-color: #CCC;
+            color: #111;
+            border-radius: 10px 0px 10px 10px;
+            direction: rtl;
+        }
+
+        #p1 {
+            background-color: #111;
+            margin: 0;
+            display: block;
+        }
+
+        #user_div {
+            direction: rtl;
+        }
+
+        ::-webkit-scrollbar {
+            width: 15px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-track:hover {
+            background: #D1D1D1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        #logout {
+            height: 40px;
+        }
+
+        span {
+            color: #AAA;
+        }
+        #loading{
+            text-align: center;
+            margin:10px;
+            color: white;
+        }
+        #hiddenDiv
+        {
+            width: 400px; 
+            height: 1px;
+        
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+    </style>
+</head>
+<body>
+    <div id="hiddenDiv"></div>
+    <div id="header">
+        <h1>Global <span>Chat</span></h1>
+        <a href="{% url 'logout' %}">
+            <button id="logout">Log out</button>
+        </a>
+    </div>
+    <div id="msg_container">
+        <h4 id="loading">loading...</h4>
+        {% for message in messages %}
+            {% if message.user == request.user %}
+            <div id="user_div"><p id="user_msg">{{message.content}}</p></div>
+            {% else %}
+            <div><p>{{message.user}}: {{message.content}}</p></div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div id="input_area">
+        <input type="text" id='tx1' placeholder="Enter your message here">
+        <button id="send">Send</button>
+    </div>
+    <button id="down" class="fa fa-chevron-down"></button>
+    <input type="hidden" value="{{request.user.username}}" id="me">
+    <script>
+        
+        let container = document.querySelector("#msg_container")
+
+        // socket handeling section
+        const me = document.getElementById("me").value
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            let will_scroll = true
+
+            if (container.scrollTop < container.scrollHeight - 1000){will_scroll = false}
+            
+            let wrapper = (e) => {
+                const data = JSON.parse(e.data);
+                if (data.user == me){
+                    container.innerHTML += `
+                        <div id="user_div"><p id="user_msg">${data.message}</p></div>`;
+                }else{
+                    container.innerHTML += `<div><p>${data.user}: ${data.message}</p></div>`;
+                }}
+            wrapper(e)  // we use a wrapper function to build the dom and not wait untill the whole function to be executed
+            
+            if (will_scroll){container.scrollTop = container.scrollHeight}
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+            
+        };
+
+        // the text input
+        document.querySelector('#input_area input').focus();
+        document.querySelector('#input_area input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#input_area button').click();
+            }
+        };
+
+        // the buttons functions
+        document.querySelector('#input_area button').onclick = function(e) {
+            const messageInputDom = document.querySelector('#input_area input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+            messageInputDom.focus()
+        }
+        
+        document.querySelector("#down").onclick = ()=>{
+            container.scrollTop = container.scrollHeight
+        }
+
+        // to scroll onload 
+        container.style.scrollBehavior = 'auto'
+        container.scrollTop = container.scrollHeight
+        container.style.scrollBehavior = 'smooth'
+
+        // api loading section
+        let url = window.location.protocol + '//' + window.location.host + "/api/messages/"
+        let counter, loading, allLoaded = null
+        setTimeout(()=>{
+            container.onscroll =  ()=>{
+                if (container.scrollTop < 300 && !loading && !allLoaded){
+                    counter = document.querySelectorAll("#msg_container > div").length
+                    loading = true
+                    let wrapper = async ()=>{
+                        let data = await fetch(url + `?counter=${counter}`)
+                        data = await data.json()
+                        if (data.length == 0){
+                            allLoaded = true
+                            document.querySelector("#msg_container #loading").innerHTML = "All messages were loaded."
+                        }else{
+                            let tag = ''
+                            for (message of data){
+                                if (message.username == me){
+                                    tag += `<div id="user_div"><p id="user_msg">${message.content}</p></div>` ;
+                                }else{
+                                    tag += `<div><p>${message.username}: ${message.content}</p></div>`;
+                                }
+                            }
+                            let hiddenDiv = document.getElementById("hiddenDiv")
+                            hiddenDiv.innerHTML = `<h4 id="loading">loading...</h4>` + tag
+                            
+                            document.querySelector("#msg_container #loading").remove()
+                            container.innerHTML = hiddenDiv.innerHTML + container.innerHTML
+                            
+                        }
+
+                    }
+                    container.style.scrollBehavior = "auto"
+                    let start = container.scrollHeight
+                    let pos1 = container.scrollTop
+                    wrapper()
+                    let end = container.scrollHeight
+                    setTimeout(
+
+                        container.scrollTo(0, pos1 + (end - start)),0
+                    )
+                    setTimeout(
+                        ()=>{
+                            container.style.scrollBehavior = 'smooth'}
+                        ,500)
+                    setTimeout(
+                        ()=>{loading = false}
+                    , 1500)                    
+                }
+            }
+        },2000)
+    </script>
+</body>
+</html>

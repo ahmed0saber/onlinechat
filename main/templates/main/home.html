@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Global online chat</title>
+    <style>
+        body{
+            background-color: #111;
+        }
+        *{
+            margin:0;
+        }
+        div{
+            box-shadow:
+                -7px -7px 20px 0px #0009,
+                -4px -4px 5px 0px #0009,
+                7px 7px 20px 0px #FFF2,
+                4px 4px 5px 0px #FFF1;
+            background: transparent;
+        }
+        button{
+            float: right;
+            width: 100px;
+            height: 50px;
+            color: #EEE;
+            border: none;
+            transition-duration: 0.7s;
+            font-size:22px;
+            font-family: 'Times New Roman', Times, serif;
+            box-shadow:
+                -7px -7px 20px 0px #0009,
+                -4px -4px 5px 0px #0009,
+                7px 7px 20px 0px #FFF2,
+                4px 4px 5px 0px #FFF1;
+            background: transparent;
+        }
+        button:hover{
+            box-shadow:
+                -7px -7px 20px 0px #2229,
+                -4px -4px 5px 0px #2229,
+                2px 2px 20px 0px #EEE2,
+                1px 1px 5px 0px #EEE2;
+            background-color: #121212;
+            color: #FFF;
+        }
+        h1{
+            padding-left: 10px;
+            color: #EEE;
+            display: inline-block;
+            font-family: 'Times New Roman', Times, serif;
+            text-shadow: 
+                0 1px 0 #444, 
+                0 2px 0 #333, 
+                0 3px 0 #555, 
+                0 4px 0 #585858, 
+                0 5px 0 #666, 
+                0 6px 1px rgba(100,100,100,.1), 
+                0 0 5px rgba(100,100,100,.1), 
+                0 1px 3px rgba(100,100,100,.3), 
+                0 3px 5px rgba(100,100,100,.2), 
+                0 5px 10px rgba(100,100,100,.25), 
+                0 10px 10px rgba(100,100,100,.2), 
+                0 20px 20px rgba(100,100,100,.15);
+        }
+        h2{
+            display: block;
+            width: 100%;
+            padding: 10px;
+            color: #EEE;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #header{
+            padding:10px;
+            border:none;
+        }
+        p{
+            padding:10px;
+            margin:10px;
+            margin-left: 25px;
+            background-color: #222;
+            color: #EEE;
+            box-shadow:
+                -7px -7px 20px 0px #0009,
+                -4px -4px 5px 0px #0009,
+                7px 7px 20px 0px #FFF2,
+                4px 4px 5px 0px #FFF1;
+        }
+        #container{
+            padding:10px;
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #fadeable{
+            height: 300px;
+            width: 300px;
+            margin: auto;
+            margin-top:20px;
+            margin-bottom:20px;
+        }
+        #login{
+            height: 40px;
+        }
+        #back{
+            margin:0;
+            padding:0;
+            height: 300px;
+            width: 300px;
+            opacity: 0;
+            transition-duration: 0.7s;
+            position: relative;
+            top: -300px;
+        }
+        #front{
+            margin:0;
+            padding:0;
+            height: 300px;
+            width: 300px;
+        }
+        #back:hover{
+            opacity: 1;
+        }
+        #dev{
+            margin:0;
+            box-shadow: none;
+        }
+        span{
+            color: #AAA;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>Global <span>Chat</span></h1>
+        <a href="{% url 'login' %}">
+            <button id="login">Log in</button>
+        </a>
+    </div>
+    <div id="container">
+        <h2>Introduction</h2>
+        <p>Global chat is a website created by Ahmed Saber (frontend developer) and Ahmed Yasser (backend developer) ... for more info about the developers , scroll down !!</p>
+        <p>Created in 2021 as a practical part of our learning process , Here we try to use websocket API for the first time...</p>
+        <p>You just need to log in to be able to send messages globally , create account if you don't have one (from the above header) .</p>
+    </div>
+    <div id="container">
+        <h2>About the developers</h2>
+        <div id="fadeable">
+            <div id="front">
+                <p id="dev">Ahmed Saber</p>
+            </div>
+            <div id="back">
+                <p id="dev">Frontend web developer</p>
+            </div>
+        </div>
+        <div id="fadeable">
+            <div id="front">
+                <p id="dev">Ahmed Yasser</p>
+            </div>
+            <div id="back">
+                <p id="dev">Backend web developer</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
