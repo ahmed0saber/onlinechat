@@ -21,11 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-try:
-    SECRET_KEY = os.environ["SECRET_KEY"]
-except KeyError:
-    from decouple import config
-    SECRET_KEY = config("SECRET_KEY")
+
+from decouple import config
+SECRET_KEY = os.environ.get("SECRET_KEY", config("SECRET_KEY"))
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,34 +81,25 @@ WSGI_APPLICATION = 'online_chat.wsgi.application'
 ASGI_APPLICATION = 'online_chat.asgi.application'
 
 REDIS_URL = os.environ.get('REDIS_URL', ('127.0.0.1', 6379))
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#         'CONFIG': {
-#             "hosts": [ REDIS_URL],
-#         },
-#     },
-# }
-
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [REDIS_URL],
         },
-        "ROUTING": "main.routing.websocket_urlpatterns",
     },
 }
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'channels_redis.core.RedisCache',
-#         'LOCATION': [('127.0.0.1', 6379), os.environ.get('REDIS_URL')],
-#         'OPTIONS': {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#         },
-#     },
-# }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': [('127.0.0.1', 6379), os.environ.get('REDIS_URL')],
+        'OPTIONS': {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

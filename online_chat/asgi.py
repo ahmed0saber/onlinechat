@@ -16,9 +16,9 @@ from django import setup
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'online_chat.settings')
 
 django_asgi_app = get_asgi_application()
-setup()
+
 application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
+    "http": django_asgi_app,
     "websocket": AuthMiddlewareStack(
         URLRouter(websocket_urlpatterns)
     )
