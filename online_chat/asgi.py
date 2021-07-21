@@ -16,14 +16,14 @@ from main.routing import websocket_urlpatterns
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'online_chat.settings')
 django.setup()
-application = get_default_application()
+# application = get_default_application()
 django_asgi_app = get_asgi_application()
-ASGI_APPLICATION = django_asgi_app
+ASGI_APPLICATION = get_default_application()
 
-# application = ProtocolTypeRouter({
-#     "http": django_asgi_app,
-#     "websocket": AuthMiddlewareStack(
-#         URLRouter(websocket_urlpatterns)
-#     )
-# })
+application = ProtocolTypeRouter({
+    "http": django_asgi_app,
+    "websocket": AuthMiddlewareStack(
+        URLRouter(websocket_urlpatterns)
+    )
+})
 
