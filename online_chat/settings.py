@@ -81,15 +81,24 @@ WSGI_APPLICATION = 'online_chat.wsgi.application'
 ASGI_APPLICATION = 'online_chat.asgi.application'
 
 REDIS_URL = os.environ.get('REDIS_URL', ('127.0.0.1', 6379))
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [REDIS_URL],
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [REDIS_URL],
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
         },
+        "ROUTING": "chat.routing.channel_routing",
     },
 }
-
 
 CACHES = {
     'default': {
