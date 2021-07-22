@@ -3,6 +3,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from .models import message
 
+
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
         self.room_name = "global"  # self.scope['url_route']['kwargs']['room_name']

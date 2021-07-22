@@ -14,6 +14,7 @@
 
         * {
             margin: 0;
+            transition: 0.5s;
         }
 
         div {}
@@ -255,8 +256,10 @@
 
         // socket handeling section
         const me = document.getElementById("me").value
+        const protocol = window.location.protocol == 'https:' ? 'wss:' : 'ws:'
         const chatSocket = new WebSocket(
-            'ws://'
+            protocol
+            +'//'
             + window.location.host
             + '/ws/chat/'
         );
