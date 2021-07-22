@@ -83,12 +83,11 @@
         a:hover{
             color: #49E;
         }
-        .false{
-        
+        .false, .true{
             padding:0;
-            color:#f00;
             margin: 0;
         }
+        .false{color:#f00}
         .true{color:#00ff00}
     </style>
 </head>
@@ -106,7 +105,7 @@
         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
         <p class="false">{{message}}</p>
         {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-        <p class="false true">{{message}}</p>
+        <p class="true">{{message}}</p>
         {% else %}
         <p>{{message}}</p>
         {% endif %}

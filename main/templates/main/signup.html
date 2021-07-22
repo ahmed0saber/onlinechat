@@ -85,10 +85,19 @@
     a:hover{
         color: #49E;
     }
+    .false{
+        color:#f00;
+        padding:0;
+        margin: 0;
+    }
+    .container{
+        height: auto;
+        padding-bottom: 15px;
+    }
 </style>
 </head>
 <body>
-<div>
+<div class="container">
     <form action="" method="post">
         {% csrf_token %}
         <p id="h_para">Sign<span>up</span></p>
@@ -96,8 +105,15 @@
         <input type="text" placeholder="Email" name="email">
         <input type="password" placeholder="Password" name="password1">
         <input type="password" placeholder="Repeat your password" name="password2">
+        {% for field in form %}
+            {% for error in field.errors%}
+            
+            <p class="false">
+                {{error}}
+            </p>
+            {% endfor %}
+        {% endfor %}
         <button>Sign Up</button>
-        {{form.erros}}
     </form>
     <p>Already have account ?! <a href="{%url 'login'%}">Log in</a></p>
 </div>
