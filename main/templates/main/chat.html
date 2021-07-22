@@ -273,9 +273,11 @@
                 const data = JSON.parse(e.data);
                 if (data.user == me){
                     container.innerHTML += `
-                        <div id="user_div"><p id="user_msg">${data.message}</p></div>`;
+                        <div id="user_div"><p id="user_msg"></p></div>`;
+                        container.lastElementChild.firstElementChild.innerText = data.message
                 }else{
-                    container.innerHTML += `<div><p>${data.user}: ${data.message}</p></div>`;
+                    container.innerHTML += `<div><p></p></div>`;
+                        container.lastElementChild.firstElementChild.innerText = `${data.user}: ${data.message}`
                 }}
             wrapper(e)  // we use a wrapper function to build the dom and not wait untill the whole function to be executed
             
