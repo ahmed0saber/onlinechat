@@ -2,3 +2,4 @@
 db.sqlite3
 main/templates/main/oldhome.html
 */__pycache__/*
+.pyc
