@@ -83,10 +83,10 @@ ASGI_APPLICATION = 'online_chat.asgi.application'
 REDIS_URL = os.environ.get('REDIS_URL', ('127.0.0.1', 6379))
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [REDIS_URL],
-        }
+        'BACKEND': "channels.layers.InMemoryChannelLayer",
+        # 'CONFIG': {
+        #     "hosts": [REDIS_URL],
+        # }
     },
 }
 
