@@ -68,16 +68,14 @@ body{
         top: 70px;
     }
 }
-
 .chat{
     max-height: 100vh;
     overflow-y: hidden;
 }
-.message-section{
-    height: calc(100vh - 118px);
-    margin: 58px 0px 0px 0px;
-    background-color: #f7f7f7;
-    overflow-y: auto;
+.chat main{
+    display: flex;
+    flex-direction: column;
+    height: 100vh
 }
 .footer{
     height: 60px;
@@ -103,6 +101,12 @@ body{
     color: #ac2b38;
     background-color: #f7f7f7;
     border: 2px solid #ac2b38;
+}
+.message-section{
+    height: 100%;
+    margin: 58px 0px 0px 0px;
+    background-color: #f7f7f7;
+    overflow-y: auto;
 }
 #down{
     float: right;
