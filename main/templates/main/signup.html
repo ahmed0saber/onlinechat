@@ -4,118 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Global Online Chat</title>
-</script>
-<style>
-    *{
-        margin:0;
-    }
-    body{
-        background-color:#111;
-    }
-    div{
-        height: 400px;
-        width: 300px;
-        margin:auto;
-        margin-top: 20px;
-        box-shadow:
-            -7px -7px 20px 0px #0009,
-            -4px -4px 5px 0px #0009,
-            7px 7px 20px 0px #FFF2,
-            4px 4px 5px 0px #FFF1;
-        background: transparent;
-        text-align: center;
-    }
-    input{
-        width: 200px;
-        height:35px;
-        border: none;
-        outline: none;
-        margin: 10px;
-        padding-left: 10px;
-        font-size: 16px;
-        box-shadow: inset
-            -7px -7px 20px 0px #0009,
-            -4px -4px 5px 0px #0009,
-            7px 7px 20px 0px #FFF2,
-            4px 4px 5px 0px #FFF1;
-        background: transparent;
-        color: #EEE;
-    }
-    button{
-        width: 100px;
-        height:35px;
-        margin: 20px;
-        margin-bottom: 0;
-        background-color: #111;
-        color: #EEE;
-        transition-duration: 0.6s;
-        font-size: 16px;
-        border: none;
-        box-shadow:
-            -7px -7px 20px 0px #0009,
-            -4px -4px 5px 0px #0009,
-            7px 7px 20px 0px #FFF2,
-            4px 4px 5px 0px #FFF1;
-        background: transparent;
-    }
-    button:hover{
-        background-color: #222;
-    }
-    #h_para{
-        color: #FFF;
-        font-size:30px;
-        font-family: 'Times New Roman', Times, serif;
-        margin: 20px;
-        padding-top: 15px;
-    }
-    span{
-        color: #AAA;
-    }
-    P{
-        color: #FFF;
-        font-size:15px;
-        font-family: 'Times New Roman', Times, serif;
-        margin: 10px;
-        padding-top: 10px;
-    }
-    a{
-        color: #27F;
-    }
-    a:hover{
-        color: #49E;
-    }
-    .false{
-        color:#f00;
-        padding:0;
-        margin: 0;
-    }
-    .container{
-        height: auto;
-        padding-bottom: 15px;
-    }
-</style>
+    <title>Signup Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Lora&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./forms.css">
 </head>
 <body>
-<div class="container">
-    <form action="" method="post">
-        {% csrf_token %}
-        <p id="h_para">Sign<span>up</span></p>
-        <input type="text" placeholder="Username" name="username">
-        <input type="text" placeholder="Email" name="email">
-        <input type="password" placeholder="Password" name="password1">
-        <input type="password" placeholder="Repeat your password" name="password2">
-        {% for field in form %}
+    <main>
+        <section>
+            <form action="" method="post">
+                {% csrf_token %}
+                <h1>Signup To Global Chat</h1>
+                <p>Create a new account to continue.</p>
+                <label>Enter your username:</label>
+                <input type="text" class="txt" placeholder="Username" name="username">
+                <label>Enter your email:</label>
+                <input type="email" class="txt" placeholder="Email" name="email">
+                <label>Enter your password:</label>
+                <input type="password" class="txt" placeholder="Password" name="password1">
+                <label>Enter your password again:</label>
+                <input type="password" class="txt" placeholder="Confirm Password" name="password2">
+                <input type="submit" class="btn" value="Sign up">
+            </form>
+            <label>Already have account ? <a href="{%url 'login'%}">Log in</a></label><br>
+            {% for field in form %}
             {% for error in field.errors%}
-            
             <p class="false">
                 {{error}}
             </p>
             {% endfor %}
-        {% endfor %}
-        <button>Sign Up</button>
-    </form>
-    <p>Already have account ?! <a href="{%url 'login'%}">Log in</a></p>
-</div>
+            {% endfor %}
+        </section>
+    </main>
 </body>
 </html>
