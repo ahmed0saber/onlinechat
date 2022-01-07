@@ -103,7 +103,7 @@ body{
     border: 2px solid #ac2b38;
 }
 .message-section{
-    height: 100%;
+    height: calc(100% - 60px);
     margin: 58px 0px 0px 0px;
     background-color: #f7f7f7;
     overflow-y: auto;
