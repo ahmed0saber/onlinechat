@@ -36,16 +36,16 @@ let container = document.querySelector("#msg_container")
         };
 
         // the text input
-        document.querySelector('#input_area input').focus();
-        document.querySelector('#input_area input').onkeyup = function(e) {
+        document.querySelector('.footer input').focus();
+        document.querySelector('.footer input').onkeyup = function(e) {
             if (e.keyCode === 13) {  // enter, return
                 document.querySelector('#input_area button').click();
             }
         };
 
         // the buttons functions
-        document.querySelector('#input_area button').onclick = function(e) {
-            const messageInputDom = document.querySelector('#input_area input');
+        document.querySelector('.footer button').onclick = function(e) {
+            const messageInputDom = document.querySelector('.footer input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
                 'message': message
