@@ -33,9 +33,9 @@
             <h4 id="loading">loading...</h4>
             {% for message in messages %}
                 {% if message.user == request.user %}
-                    <div id="user_div"><p id="user_msg">{{message.content}}</p></div>
+                    <div id="user_div"><p id="user_msg" class="msg">{{message.content}}</p></div>
                 {% else %}
-                    <div><p>{{message.user}}: {{message.content}}</p></div>
+                    <div><p class="msg">{{message.user}}: {{message.content}}</p></div>
                 {% endif %}
             {% endfor %}
         </section>
