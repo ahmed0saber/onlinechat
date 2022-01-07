@@ -3,3 +3,7 @@ db.sqlite3
 main/templates/main/oldhome.html
 */__pycache__/*
 .pyc
+main/migrations/__pycache__/__init__.cpython-310.pyc
+*/__pycache__
+*.pyc
+main/__pycache__/consumers.cpython-39.pyc
