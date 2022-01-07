@@ -21,8 +21,10 @@ def loginView(request):
     if request.method == "POST":
         user_name = request.POST.get("username")
         user_pass = request.POST.get("password")
+        print(user_name, user_pass)
         user = authenticate(request, username=user_name, password=user_pass)
         if user:
+            print(user)
             login(request, user)
             return redirect('chat')
         else:
