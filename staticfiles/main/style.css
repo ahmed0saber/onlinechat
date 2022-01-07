@@ -70,7 +70,6 @@ body{
 }
 .chat{
     max-height: 100vh;
-    overflow-y: hidden;
 }
 .chat main{
     display: flex;
