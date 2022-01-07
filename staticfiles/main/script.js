@@ -19,10 +19,10 @@ let container = document.querySelector("#msg_container")
                 const data = JSON.parse(e.data);
                 if (data.user == me){
                     container.innerHTML += `
-                        <div id="user_div"><p id="user_msg"></p></div>`;
+                        <div id="user_div"><p id="user_msg" class="msg"></p></div>`;
                         container.lastElementChild.firstElementChild.innerText = data.message
                 }else{
-                    container.innerHTML += `<div><p></p></div>`;
+                    container.innerHTML += `<div><p class="msg"></p></div>`;
                         container.lastElementChild.firstElementChild.innerText = `${data.user}: ${data.message}`
                 }}
             wrapper(e)  // we use a wrapper function to build the dom and not wait untill the whole function to be executed
@@ -39,7 +39,7 @@ let container = document.querySelector("#msg_container")
         document.querySelector('.footer input').focus();
         document.querySelector('.footer input').onkeyup = function(e) {
             if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#input_area button').click();
+                document.querySelector('.footer button').click();
             }
         };
 
@@ -81,9 +81,9 @@ let container = document.querySelector("#msg_container")
                             let tag = ''
                             for (message of data){
                                 if (message.username == me){
-                                    tag += `<div id="user_div"><p id="user_msg">${message.content}</p></div>` ;
+                                    tag += `<div id="user_div"><p id="user_msg" class="msg">${message.content}</p></div>` ;
                                 }else{
-                                    tag += `<div><p>${message.username}: ${message.content}</p></div>`;
+                                    tag += `<div><p class="msg">${message.username}: ${message.content}</p></div>`;
                                 }
                             }
                             let hiddenDiv = document.getElementById("hiddenDiv")
