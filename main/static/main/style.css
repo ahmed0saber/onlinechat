@@ -82,7 +82,7 @@ body{
     display: flex;
 }
 .footer input{
-    width: 100%;
+    width: calc(100% - 60px);
     padding: 5px;
     font-size: 17px;
     border: 2px solid #ac2b38;
